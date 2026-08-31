@@ -19,7 +19,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.14.0-181.0.dev
+  sdk: ^3.11.4
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -43,11 +43,11 @@ dependencies:
   flutter_bloc: ^9.1.1
   dio: ^5.11.0
   dartz: ^0.10.1
-  shared_preferences: ^2.5.5
+  shared_preferences: 
   jwt_decoder: ^2.0.1
   cached_network_image: ^3.4.1
   flutter_image_slideshow: ^0.1.6
-  fluttertoast: ^9.1.0
+  fluttertoast: 
 
 dev_dependencies:
   flutter_test:
@@ -71,8 +71,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -86,10 +86,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

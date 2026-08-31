@@ -5,7 +5,7 @@ import 'package:e_commerce_nti_project/features/home/presentation/view_model/get
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+     
 class HomeViewRoot extends StatefulWidget {
   const HomeViewRoot({super.key});
 
