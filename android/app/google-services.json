@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "927439978196",
+    "project_id": "e-commerce-app-nti-82f0f",
+    "storage_bucket": "e-commerce-app-nti-82f0f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927439978196:android:a3280b89ce8d73a0488541",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_nti_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtxqxil34ZxdaQXe3DK408iHdmbsZ9TBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
