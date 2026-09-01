@@ -4,6 +4,7 @@ import 'package:e_commerce_nti_project/core/utils/functions/app_navigator.dart';
 import 'package:e_commerce_nti_project/core/utils/functions/show_toast.dart';
 import 'package:e_commerce_nti_project/core/utils/widgets/custom_btn.dart';
 import 'package:e_commerce_nti_project/features/auth/presentation/view_model/signin_cubit/signin_cubit.dart';
+import 'package:e_commerce_nti_project/features/auth/presentation/view_model/signin_with_google_cubit/signin_with_google_cubit.dart';
 import 'package:e_commerce_nti_project/features/auth/presentation/views/widgets/custom_continue_with_google_widget.dart';
 import 'package:e_commerce_nti_project/features/auth/presentation/views/widgets/custom_text_field_signin.dart';
 import 'package:e_commerce_nti_project/features/auth/presentation/views/widgets/forgot_password_widget.dart';
@@ -115,9 +116,8 @@ class CustomFormSignin extends StatelessWidget {
                         )
                       : CustomBtn(title: 'Login', onTap: signinCubit.signin),
                   Gap(50.h),
-                  CustomContinueWithGoogleWidget(
-                    color: AppColors.brownLightRGB,
-                  ),
+              
+              
                 ],
               ),
             ],

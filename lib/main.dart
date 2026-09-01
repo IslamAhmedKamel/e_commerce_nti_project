@@ -2,6 +2,7 @@ import 'package:e_commerce_nti_project/core/observe.dart';
 import 'package:e_commerce_nti_project/core/share.dart';
 import 'package:e_commerce_nti_project/firebase_options.dart';
 import 'package:e_commerce_nti_project/root.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,13 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await CacheHelper.init();
   await GoogleSignIn.instance.initialize();
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user == null) {
+      debugPrint('User is currently signed out!');
+    } else {
+      debugPrint('User is signed in!');
+    }
+  });
   Bloc.observer = Observe();
   runApp(const EcommereceApp());
 }
