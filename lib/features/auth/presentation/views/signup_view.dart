@@ -2,10 +2,12 @@ import 'package:e_commerce_nti_project/core/utils/app_colors.dart';
 import 'package:e_commerce_nti_project/core/utils/app_router.dart';
 import 'package:e_commerce_nti_project/core/utils/app_styles.dart';
 import 'package:e_commerce_nti_project/core/utils/functions/app_navigator.dart';
+import 'package:e_commerce_nti_project/features/auth/presentation/view_model/signin_with_google_cubit/signin_with_google_cubit.dart';
 import 'package:e_commerce_nti_project/features/auth/presentation/views/widgets/custom_continue_with_google_widget.dart';
 import 'package:e_commerce_nti_project/features/auth/presentation/views/widgets/custom_form_sinup.dart';
 import 'package:e_commerce_nti_project/features/auth/presentation/views/widgets/have_an_account.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
@@ -36,8 +38,11 @@ class SignupView extends StatelessWidget {
                   ),
                   Gap(32.h),
                   CustomFormSinup(),
-                  
-                  CustomContinueWithGoogleWidget(),
+
+                  BlocProvider(
+                    create: (context) => SigninWithGoogleCubit(),
+                    child: CustomContinueWithGoogleWidget(),
+                  ),
                   HaveAnAccount(
                     onTap: () {
                       AppNavigator.navigatePushReplacement(
