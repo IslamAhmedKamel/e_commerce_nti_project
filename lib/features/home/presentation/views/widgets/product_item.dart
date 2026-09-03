@@ -5,14 +5,21 @@ import 'package:e_commerce_nti_project/core/utils/app_styles.dart';
 import 'package:e_commerce_nti_project/core/utils/functions/app_navigator.dart';
 import 'package:e_commerce_nti_project/features/favorites/presentation/view_models/get_favorits_cubit/get_favorits_cubit.dart';
 import 'package:e_commerce_nti_project/features/home/data/models/product_model.dart';
+import 'package:e_commerce_nti_project/features/home/presentation/view_model/add_product_to_favorit_cubit/add_product_to_favorit_cubit.dart';
+import 'package:e_commerce_nti_project/features/home/presentation/view_model/add_product_to_favorit_cubit/add_product_to_favorit_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key, required this.productModel});
+  const ProductItem({
+    super.key,
+    required this.productModel,
+  });
+
   final ProductModel productModel;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -35,17 +42,26 @@ class ProductItem extends StatelessWidget {
                 width: double.infinity,
                 child: CachedNetworkImage(
                   height: 120.h,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
                   imageUrl: productModel.imageCover,
                   fit: BoxFit.cover,
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  placeholder: (context, url) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  errorWidget: (context, url, error) {
+                    return const Icon(Icons.error);
+                  },
                 ),
               ),
             ),
+
             Gap(8.h),
+
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 8.spMin),
+              padding: EdgeInsets.symmetric(
+                horizontal: 8.spMin,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -55,7 +71,9 @@ class ProductItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: AppStyles.style12,
                   ),
+
                   Gap(4.h),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -63,34 +81,78 @@ class ProductItem extends StatelessWidget {
                         "EGP ${productModel.price}",
                         style: AppStyles.style12,
                       ),
-                      // استخدام BlocBuilder واحد يسمع للكيوبتات المطلوبة
+
                       BlocBuilder<GetFavoritsCubit, GetFavoritsState>(
-                        builder: (context, favoritsState) {
-                          return IconButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: () {},
-                            icon: const Icon(Icons.favorite_outline),
+                        builder: (context, state) {
+                          final isFavorite = context
+                              .read<GetFavoritsCubit>()
+                              .isFavorite(productModel.id!);
+
+                          return BlocListener<
+                              AddProductToFavoritCubit,
+                              AddProductToFavoritState>(
+                            listener: (context, addState) {
+                              if (addState
+                                  is AddProductToFavoritSucsece) {
+                                // تحديث قائمة المفضلة
+                                context
+                                    .read<GetFavoritsCubit>()
+                                    .getFavorits();
+                              }
+                            },
+                            child: IconButton(
+                              padding: EdgeInsets.zero,
+
+                              onPressed: () {
+                                if (!isFavorite) {
+                                  context
+                                      .read<
+                                          AddProductToFavoritCubit>()
+                                      .addProductToFavorit(
+                                        productId:
+                                            productModel.id!,
+                                      );
+                                }
+                              },
+
+                              icon: Icon(
+                                isFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_outline,
+                                color: isFavorite
+                                    ? Colors.red
+                                    : Colors.grey,
+                              ),
+                            ),
                           );
                         },
                       ),
                     ],
                   ),
+
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Review", style: AppStyles.style12),
+                      Text(
+                        "Review",
+                        style: AppStyles.style12,
+                      ),
+
                       Row(
                         children: [
                           Text(
                             "(${productModel.ratingsAverage})",
                             style: AppStyles.style12,
                           ),
-                          Icon(Icons.star, color: AppColors.brownLightRGB),
+                          Icon(
+                            Icons.star,
+                            color: AppColors.brownLightRGB,
+                          ),
                         ],
                       ),
                     ],
                   ),
-                  // Gap(4.h),
                 ],
               ),
             ),

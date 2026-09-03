@@ -1,12 +1,17 @@
+import 'package:dio/dio.dart';
+import 'package:e_commerce_nti_project/core/api_service.dart';
 import 'package:e_commerce_nti_project/core/utils/app_assets.dart';
 import 'package:e_commerce_nti_project/core/utils/app_colors.dart';
 import 'package:e_commerce_nti_project/core/utils/app_styles.dart';
 import 'package:e_commerce_nti_project/core/utils/constant_app.dart';
+import 'package:e_commerce_nti_project/features/home/data/home_repo/home_repo_impl.dart';
+import 'package:e_commerce_nti_project/features/home/presentation/view_model/add_product_to_favorit_cubit/add_product_to_favorit_cubit.dart';
 import 'package:e_commerce_nti_project/features/home/presentation/views/widgets/ads_list.dart';
 import 'package:e_commerce_nti_project/features/home/presentation/views/widgets/all_brands_list.dart';
 import 'package:e_commerce_nti_project/features/home/presentation/views/widgets/all_featured_list_veiw.dart';
 import 'package:e_commerce_nti_project/features/home/presentation/views/widgets/searchany_product_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -70,7 +75,16 @@ class HomeViewTab extends StatelessWidget {
                     ],
                   ),
                 ),
-                AllBrandsList(),
+                BlocProvider(
+                  create: (context) => AddProductToFavoritCubit(
+                    homeRepo: HomeRepoImpl(
+                      apiService: ApiService(
+                        dio: Dio(BaseOptions()),
+                      ),
+                    ),
+                  ),
+                  child: const AllProductsList(),
+                ),
               ],
             ),
           ),

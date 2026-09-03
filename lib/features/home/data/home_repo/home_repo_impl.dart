@@ -34,7 +34,9 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<Failure, List<ProductModel>>> getAllProducts() async {
     try {
-      var data = await apiService.getData(endPoint: AppConstant.productsEndPoint);
+      var data = await apiService.getData(
+        endPoint: AppConstant.productsEndPoint,
+      );
       List<ProductModel> products = [];
       for (var product in data["data"]) {
         products.add(ProductModel.fromJson(product));
@@ -66,6 +68,25 @@ class HomeRepoImpl extends HomeRepo {
     } on Exception catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioEx(e));
+      }
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, AddProductToFavoritModelResponse>>
+  getProductsFromFavorit({Map<String, dynamic>? headers}) async {
+    try {
+      var reponse = await apiService.getData(
+        endPoint: AppConstant.wishlist,
+        headers: headers,
+      );
+      AddProductToFavoritModelResponse product =
+          AddProductToFavoritModelResponse.fromJson(reponse);
+      return right(product);
+    } on Exception catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioEx(e));  
       }
       return left(ServerFailure(errorMessage: e.toString()));
     }

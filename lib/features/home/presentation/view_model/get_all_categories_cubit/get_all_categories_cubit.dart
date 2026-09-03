@@ -1,6 +1,5 @@
 import 'package:e_commerce_nti_project/features/home/data/home_repo/home_repo.dart';
 import 'package:e_commerce_nti_project/features/home/data/models/catygroy_model.dart';
-import 'package:e_commerce_nti_project/features/home/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

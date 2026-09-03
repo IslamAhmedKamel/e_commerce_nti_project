@@ -5,7 +5,7 @@ import 'package:e_commerce_nti_project/features/auth/data/auth_repo/auth_repo_im
 import 'package:e_commerce_nti_project/features/auth/presentation/view_model/signup_cubit/signup_cubit.dart';
 import 'package:e_commerce_nti_project/features/auth/presentation/views/signin_view.dart';
 import 'package:e_commerce_nti_project/features/auth/presentation/views/signup_view.dart';
-import 'package:e_commerce_nti_project/features/favorites/presentation/view_models/favorit_repo/favorit_repo_impl.dart';
+import 'package:e_commerce_nti_project/features/favorites/data/favorit_repo/favorit_repo_impl.dart';
 import 'package:e_commerce_nti_project/features/favorites/presentation/view_models/get_favorits_cubit/get_favorits_cubit.dart';
 import 'package:e_commerce_nti_project/features/home/data/home_repo/home_repo_impl.dart';
 import 'package:e_commerce_nti_project/features/home/presentation/view_model/get_all_categories_cubit/get_all_categories_cubit.dart';
@@ -51,7 +51,7 @@ class AppRouter {
                 ),
               ),
               BlocProvider(
-                create: (context) => GetAllBrandsCubit(
+                create: (context) => GetAllProductsCubit(
                   homeRepo: HomeRepoImpl(apiService: ApiService(dio: Dio())),
                 )..getData(),
               ),
@@ -79,12 +79,6 @@ class AppRouter {
           );
         },
       ),
-      // GoRoute(
-      //   path: detailsPath,
-      //   builder: (BuildContext context, GoRouterState state) {
-      //     return DetailsView(productModel: state.extra as ProductModel);
-      //   },
-      // ),
       GoRoute(
         path: signUpPath,
         builder: (context, state) {
@@ -96,18 +90,6 @@ class AppRouter {
           );
         },
       ),
-
-      // GoRoute(
-      //   path: forgotPath,
-      //   builder: (BuildContext context, GoRouterState state) {
-      //     return BlocProvider(
-      //       create: (context) => ForgotPasswordCubit(
-      //         authRepo: AuthRepoImplement(apiService: ApiService(dio: Dio())),
-      //       ),
-      //       child: const ForgotPasswordView(),
-      //     );
-      //   },
-      // ),
     ],
   );
 }

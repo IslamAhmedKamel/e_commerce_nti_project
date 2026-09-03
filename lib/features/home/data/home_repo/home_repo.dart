@@ -12,4 +12,9 @@ abstract class HomeRepo {
     required Map<String, dynamic> data,
     Map<String, dynamic>? headers,
   });
+  Future<Either<Failure, AddProductToFavoritModelResponse>>
+  getProductsFromFavorit({
+    Map<String, dynamic>? headers,
+  });
+
 }
