@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_nti_project/core/utils/app_colors.dart';
+import 'package:e_commerce_nti_project/core/utils/app_router.dart';
 import 'package:e_commerce_nti_project/core/utils/app_styles.dart';
+import 'package:e_commerce_nti_project/core/utils/functions/app_navigator.dart';
 import 'package:e_commerce_nti_project/features/favorites/presentation/view_models/get_favorits_cubit/get_favorits_cubit.dart';
 import 'package:e_commerce_nti_project/features/home/data/models/product_model.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +17,11 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // AppNavigator.navigatePush(
-        //   context: context,
-        //   path: AppRouter.detailsPath,
-        //   extra: productModel,
-        // );
+        AppNavigator.navigatePush(
+          context: context,
+          path: AppRouter.detailsPath,
+          extra: productModel,
+        );
       },
       child: Card(
         color: Colors.white,
@@ -29,10 +31,10 @@ class ProductItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: SizedBox(
-                height: 150.h,
+                height: 120.h,
                 width: double.infinity,
                 child: CachedNetworkImage(
-                  height: 150.h,
+                  height: 120.h,
                   placeholder: (context, url) =>
                       const Center(child: CircularProgressIndicator()),
                   imageUrl: productModel.imageCover,
@@ -49,10 +51,11 @@ class ProductItem extends StatelessWidget {
                 children: [
                   Text(
                     productModel.title,
-                    maxLines: 2,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: AppStyles.style12,
                   ),
-                  Gap(8.h),
+                  Gap(4.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -87,7 +90,7 @@ class ProductItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Gap(4.h),
+                  // Gap(4.h),
                 ],
               ),
             ),

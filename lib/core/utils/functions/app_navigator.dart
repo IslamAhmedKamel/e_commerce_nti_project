@@ -12,8 +12,9 @@ class AppNavigator {
   static void navigatePush({
     required BuildContext context,
     required String path,
+    Object? extra,
   }) {
-    GoRouter.of(context).push(path);
+    GoRouter.of(context).push(path, extra: extra);
   }
 
   static void navigatePop({required BuildContext context}) {

@@ -3,18 +3,18 @@ part of 'get_all_brands_cubit.dart';
 @immutable
 sealed class GetAllBrandsState {}
 
-final class GetAllBrandsInitial extends GetAllBrandsState {}
+final class GetAllProductsInitial extends GetAllBrandsState {}
 
-final class GetAllBrandsLoading extends GetAllBrandsState {}
+final class GetAllProductsLoading extends GetAllBrandsState {}
 
-final class GetAllBrandsFailure extends GetAllBrandsState {
+final class GetAllProductsFailure extends GetAllBrandsState {
   final String errorMessage;
 
-  GetAllBrandsFailure({required this.errorMessage});
+  GetAllProductsFailure({required this.errorMessage});
 }
 
-final class GetAllBrandsSucsecefull extends GetAllBrandsState {
-  final List<CategoryModel> products;
+final class GetAllProductsSucsecefull extends GetAllBrandsState {
+  final List<ProductModel> products;
 
-  GetAllBrandsSucsecefull({required this.products});
+  GetAllProductsSucsecefull({required this.products});
 }

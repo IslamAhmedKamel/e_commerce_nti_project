@@ -6,6 +6,7 @@ import 'package:e_commerce_nti_project/core/utils/constant_app.dart';
 import 'package:e_commerce_nti_project/features/favorites/data/models/add_product_to_favorit_model_response.dart';
 import 'package:e_commerce_nti_project/features/home/data/home_repo/home_repo.dart';
 import 'package:e_commerce_nti_project/features/home/data/models/catygroy_model.dart';
+import 'package:e_commerce_nti_project/features/home/data/models/product_model.dart';
 
 class HomeRepoImpl extends HomeRepo {
   final ApiService apiService;
@@ -31,12 +32,12 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<CategoryModel>>> getAllBrands() async {
+  Future<Either<Failure, List<ProductModel>>> getAllProducts() async {
     try {
-      var data = await apiService.getData(endPoint: AppConstant.brandsEndPoint);
-      List<CategoryModel> products = [];
+      var data = await apiService.getData(endPoint: AppConstant.productsEndPoint);
+      List<ProductModel> products = [];
       for (var product in data["data"]) {
-        products.add(CategoryModel.fromJson(product));
+        products.add(ProductModel.fromJson(product));
       }
       return right(products);
     } on Exception catch (dioExcep) {
